@@ -68,7 +68,6 @@ def get_next_lower_word(source):
         
     if (word_len):
         return word
-        
     else:
         return None
 
@@ -108,7 +107,7 @@ def process_args(args):
             break
         else:
             # Don't think we ever get here before exception thrown earlier.
-            printf ("didn't expect program parameter %c [0%o]\n" % (o, o))
+            print ("didn't expect program parameter %c [0%o]\n" % (o, o))
             usage ()
  
  
