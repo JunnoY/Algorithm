@@ -1,6 +1,5 @@
 from enum import Enum
 from math import floor
-
 import config
 import sys
 
@@ -19,15 +18,14 @@ class darray:
         self.sorted = False
 
     def find(self, value):
-        if (self.mode == SearchModes.LINEAR_SEARCH.value):
+        if (config.mode == SearchModes.LINEAR_SEARCH.value):
             # TODO implement linear search through list
             #  (linear search)
             for i in self.array:
                 if value == i:
-                    print("Value is found")
+                    return True
             else:
-                print("Value is not found")
-            print("Linear search not yet implemented")
+                return False
         else:
             if (not self.sorted):
                 if (self.verbose > 0):
@@ -40,46 +38,6 @@ class darray:
                 self.sorted = True
 
             # TODO implement binary search through self.array
-            # sort the self.array first (make insertion sort and quick sort)
-            # insertion sort
-            def insertion_sort(array):
-                for i in range(1, len(array)):
-                    key = array[i]
-                    for j in range(i - 1, -1, -1):
-                        if array[j] > key:
-                            array[j + 1] = array[j]
-                            array[j] = key
-
-            # insertion_sort(self.array)
-
-            # quicksort
-            def partition(array, low, high):
-                pivot = array[low]
-                i = low
-                j = high
-                while (i < j):
-                    while i <= high and array[i] <= pivot:
-                        i += 1
-                    while j >= low and array[j] > pivot:
-                        j -= 1
-                    if (i < j):
-                        temp = array[i]
-                        array[i] = array[j]
-                        array[j] = temp
-                temp = array[low]
-                array[low] = array[j]
-                array[j] = temp
-                return j
-
-            def quicksort(array, low, high):
-                if low < high:
-                    pi = partition(array, low, high)
-                    quicksort(array, low, pi - 1)
-                    quicksort(array, pi + 1, high)
-                return array
-
-            # print(quicksort(self.array, 0, len(self.array) - 1))
-
             # search value in array (binary search)
             lower_bound = 0
             upper_bound = len(self.array) - 1
@@ -90,9 +48,7 @@ class darray:
                 elif (self.array[middle] > value):
                     upper_bound = middle - 1
                 else:
-                    print("Value is found")
-            else:
-                print("Value is not found")
+                    return True
         return False
 
     def print_set(self):
@@ -127,13 +83,40 @@ class darray:
         self.array[b] = temp
 
     def insertion_sort(self):
-        sys.stderr.write("Not implemented\n")
-        sys.exit(-1)
+        for i in range(1, len(self.array)):
+            key = self.array[i]
+            for j in range(i - 1, -1, -1):
+                if self.array[j] > key:
+                    self.array[j + 1] = self.array[j]
+                    self.array[j] = key
 
     # Hint: you probably want to define a help function for the recursive call
+    def partition(self, low, high):
+        pivot = self.array[low]
+        i = low
+        j = high
+        while (i < j):
+            while i <= high and self.array[i] <= pivot:
+                i += 1
+            while j >= low and self.array[j] > pivot:
+                j -= 1
+            if (i < j):
+                temp = self.array[i]
+                self.array[i] = self.array[j]
+                self.array[j] = temp
+        temp = self.array[low]
+        self.array[low] = self.array[j]
+        self.array[j] = temp
+        return j
+
+    def quicksort(self, low, high):
+        if low < high:
+            pi = self.partition(self.array, low, high)
+            self.quicksort(self.array, low, pi - 1)
+            self.quicksort(self.array, pi + 1, high)
+
     def quick_sort(self):
-        sys.stderr.write("Not implemented\n")
-        sys.exit(-1)
+       self.quicksort(0, len(self.array) - 1)
 
 
 class SearchModes(Enum):

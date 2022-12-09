@@ -108,7 +108,7 @@ def process_args(args):
             break
         else:
             # Don't think we ever get here before exception thrown earlier.
-            printf ("didn't expect program parameter %c [0%o]\n" % (o, o))
+            print ("didn't expect program parameter %c [0%o]\n" % (o, o))
             usage ()
  
  
@@ -137,6 +137,7 @@ def spelling(args):
     text_file = open(file_name)
     
     words = set_factory.initialise_set()
+    print("words:" + str(words.print_set()))
     
     if (config.verbose > 0):
         sys.stderr.write("Reading dictionary\n")
@@ -169,7 +170,6 @@ def spelling(args):
             break
         if (not words.find(word)):
             print("%d: %s\n" % (line_count, word));
-
     print("Usage statistics:\n");
     words.print_stats ()
 
