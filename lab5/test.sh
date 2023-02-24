@@ -65,10 +65,10 @@ then
 fi
 
 algs=( enum bnb dp greedy )
-inputs=( 'easy.20.txt' 'easy.200.txt' 'hard.200.txt' 'hard.2000.txt' ) 
-declare -A times=( 
-  ['easy.20.txt']=5
-  ['easy.200.txt']=5
+inputs=( 'easy.20.txt' 'easy.200.txt' 'hard.200.txt' 'hard.2000.txt' )
+declare -A times=(
+  ['easy.20.txt']=10
+  ['easy.200.txt']=10
   ['hard.200.txt']=60
   ['hard.2000.txt']=60
 )
